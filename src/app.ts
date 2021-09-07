@@ -19,22 +19,20 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 
 // catch 404 and forward to error handler
-app.use((req: Request, res: Response, next: NextFunction) => {
+app.use((next: NextFunction) => {
   next(createError(404));
 });
 
 // error handler
-app.use(
-  (err: HttpException, req: Request, res: Response, next: NextFunction) => {
-    // set locals, only providing error in development
-    res.locals.message = err.message;
-    res.locals.error = req.app.get("env") === "development" ? err : {};
+app.use((err: HttpException, req: Request, res: Response) => {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get("env") === "development" ? err : {};
 
-    // render the error page
-    res.status(err.status || 500);
-    res.json(res);
-  }
-);
+  // render the error page
+  res.status(err.status || 500);
+  res.json(res);
+});
 
 app.listen(8000, () => {
   console.log("Server listening");
