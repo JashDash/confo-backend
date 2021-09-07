@@ -52,6 +52,7 @@ app.listen(8000, async () => {
     const doc = new FormModel({
       disableEditResponses: true,
       name: "My form",
+      chatTheme: "BLUE",
     });
     await doc.save();
   } else {
