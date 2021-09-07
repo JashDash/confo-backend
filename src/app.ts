@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 import { Application, Request, Response, NextFunction } from "express";
 import HttpException from "./exceptions/HttpException";
+import FormModel from "./models/formModel";
 
 const indexRouter = require("./routes/indexRoute");
 
@@ -46,6 +47,13 @@ app.listen(8000, async () => {
       useNewUrlParser: true,
     });
     console.log("Connected to database");
+
+    // For testing purpose
+    const doc = new FormModel({
+      allowEditResponses: true,
+      name: "My form",
+    });
+    await doc.save();
   } else {
     console.error("Did not find DB and/or DB_PASSWORD");
   }
