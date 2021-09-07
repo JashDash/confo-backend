@@ -36,17 +36,16 @@ app.use((err: HttpException, req: Request, res: Response) => {
   res.json(res);
 });
 
-app.listen(8000, () => {
+app.listen(8000, async () => {
   if (process.env.DB && process.env.DB_PASSWORD) {
     const database = process.env.DB.replace(
       "<password>",
       process.env.DB_PASSWORD
     );
-    mongoose
-      .connect(database, {
-        useNewUrlParser: true,
-      })
-      .then(() => console.log("Connected to database"));
+    await mongoose.connect(database, {
+      useNewUrlParser: true,
+    });
+    console.log("Connected to database");
   } else {
     console.error("Did not find DB and/or DB_PASSWORD");
   }
