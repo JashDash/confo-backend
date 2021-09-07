@@ -3,6 +3,8 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+const mongoose = require("mongoose");
+require("dotenv").config();
 import { Application, Request, Response, NextFunction } from "express";
 import HttpException from "./exceptions/HttpException";
 
@@ -35,7 +37,19 @@ app.use((err: HttpException, req: Request, res: Response) => {
 });
 
 app.listen(8000, () => {
-  console.log("Server listening");
+  if (process.env.DB && process.env.DB_PASSWORD) {
+    const database = process.env.DB.replace(
+      "<password>",
+      process.env.DB_PASSWORD
+    );
+    mongoose
+      .connect(database, {
+        useNewUrlParser: true,
+      })
+      .then(() => console.log("Connected to database"));
+  } else {
+    console.error("Did not find DB and/or DB_PASSWORD");
+  }
 });
 
 module.exports = app;
