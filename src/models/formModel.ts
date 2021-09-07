@@ -18,12 +18,10 @@ interface Form {
 const formsSchema = new Schema<Form>({
   allowEditResponses: {
     type: Boolean,
-    default: true,
   },
   chatTheme: {
     type: String,
     enum: ThemeChoices,
-    default: "BLUE",
   },
   name: {
     type: String,
