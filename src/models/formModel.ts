@@ -7,15 +7,7 @@ enum ThemeChoices {
   "DARK",
 }
 
-// TODO: add questions
-interface Form {
-  disableEditResponses?: boolean;
-  chatTheme?: ThemeChoices;
-  name: string;
-  description?: string;
-}
-
-const formsSchema = new Schema<Form>({
+const formsSchema = new Schema({
   disableEditResponses: {
     type: Boolean,
   },
@@ -32,6 +24,6 @@ const formsSchema = new Schema<Form>({
   },
 });
 
-const FormModel = mongoose.model<Form>("Form", formsSchema);
+const Form = mongoose.model("Form", formsSchema);
 
-export default FormModel;
+export default Form;
