@@ -9,14 +9,14 @@ enum ThemeChoices {
 
 // TODO: add questions
 interface Form {
-  allowEditResponses?: boolean;
+  disableEditResponses?: boolean;
   chatTheme?: ThemeChoices;
   name: string;
   description?: string;
 }
 
 const formsSchema = new Schema<Form>({
-  allowEditResponses: {
+  disableEditResponses: {
     type: Boolean,
   },
   chatTheme: {

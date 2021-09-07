@@ -50,7 +50,7 @@ app.listen(8000, async () => {
 
     // For testing purpose
     const doc = new FormModel({
-      allowEditResponses: true,
+      disableEditResponses: true,
       name: "My form",
     });
     await doc.save();
