@@ -7,6 +7,24 @@ enum ThemeChoices {
   "DARK",
 }
 
+const questionSchema = new Schema(
+  {
+    questionType: {
+      type: String,
+      required: true,
+      enum: ["TextQuestion", "NumberQuestion"],
+    },
+    questionId: {
+      type: mongoose.Types.ObjectId,
+      required: true,
+      refPath: "questions.questionType",
+    },
+  },
+  {
+    _id: false,
+  }
+);
+
 const formsSchema = new Schema({
   disableEditResponses: {
     type: Boolean,
@@ -22,20 +40,7 @@ const formsSchema = new Schema({
   description: {
     type: String,
   },
-  questions: [
-    {
-      questionType: {
-        type: String,
-        required: true,
-        enum: ["TextQuestion", "NumberQuestion"],
-      },
-      questionId: {
-        type: mongoose.Types.ObjectId,
-        required: true,
-        refPath: "questions.questionType",
-      },
-    },
-  ],
+  questions: [questionSchema],
 });
 
 const Form = mongoose.model("Form", formsSchema);
