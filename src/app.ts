@@ -70,7 +70,7 @@ app.listen(8000, async () => {
     await textQues.save();
 
     // Form
-    const doc = new FormModel({
+    const form = new FormModel({
       name: "My form",
       chatTheme: "BLUE",
       questions: [
@@ -78,17 +78,17 @@ app.listen(8000, async () => {
         { questionType: "NumberQuestion", questionId: numQues.id },
       ],
     });
-    await doc.save();
+    await form.save();
 
     // Populate
-    let result = await FormModel.findOne({ id: doc.id }).populate(
+    let result = await FormModel.findOne({ id: form.id }).populate(
       "questions.questionId"
     );
     const util = require("util");
     console.log(util.inspect(result, false, null, true));
 
     // Clean up db
-    await FormModel.findOneAndDelete({ id: doc.id });
+    await FormModel.findOneAndDelete({ id: form.id });
     await TextQuestion.findOneAndDelete({ id: textQues.id });
     await NumberQuestion.findOneAndDelete({ id: numQues.id });
   } else {
