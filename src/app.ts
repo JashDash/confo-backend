@@ -10,6 +10,7 @@ import { Application, Request, Response, NextFunction } from "express";
 import HttpException from "./exceptions/HttpException";
 import FormModel from "./models/formModel";
 import NumberQuestion from "./models/numberQuestionModel";
+import PhoneNumberQuestion from "./models/phoneNumberQuestionModel";
 import TextQuestion from "./models/textQuestionModel";
 
 const indexRouter = require("./routes/indexRoute");
@@ -69,6 +70,14 @@ app.listen(8000, async () => {
     });
     await textQues.save();
 
+    const phNoQues = new PhoneNumberQuestion({
+      label: "Please enter your phone number",
+      name: "phone",
+      exampleInput: "8146333589, 9530704884",
+      validateByOtp: true,
+    });
+    await phNoQues.save();
+
     // Form
     const form = new FormModel({
       name: "My form",
@@ -76,6 +85,7 @@ app.listen(8000, async () => {
       questions: [
         { questionType: "TextQuestion", questionId: textQues.id },
         { questionType: "NumberQuestion", questionId: numQues.id },
+        { questionType: "PhoneNumberQuestion", questionId: phNoQues.id },
       ],
     });
     await form.save();
@@ -91,6 +101,7 @@ app.listen(8000, async () => {
     await FormModel.findOneAndDelete({ id: form.id });
     await TextQuestion.findOneAndDelete({ id: textQues.id });
     await NumberQuestion.findOneAndDelete({ id: numQues.id });
+    await PhoneNumberQuestion.findOneAndDelete({ id: phNoQues.id });
   } else {
     console.error("Did not find DB and/or DB_PASSWORD");
   }
