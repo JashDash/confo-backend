@@ -6,10 +6,6 @@ const textQuestionSchema = new Schema({
     type: String,
     required: true,
   },
-  inputType: {
-    type: String,
-    required: true,
-  },
   optional: {
     type: Boolean,
     default: false,
