@@ -1,7 +1,16 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
 
-const numberQuestionSchema = new Schema({
+interface INumberQuestionSchema {
+  label: string;
+  optional: boolean;
+  name: string;
+  exampleInput: string;
+  min: number;
+  max: number;
+}
+
+const numberQuestionSchema = new Schema<INumberQuestionSchema>({
   label: {
     type: String,
     required: true,
@@ -26,6 +35,9 @@ const numberQuestionSchema = new Schema({
   },
 });
 
-const NumberQuestion = mongoose.model("NumberQuestion", numberQuestionSchema);
+const NumberQuestion = mongoose.model<INumberQuestionSchema>(
+  "NumberQuestion",
+  numberQuestionSchema
+);
 
 export default NumberQuestion;
