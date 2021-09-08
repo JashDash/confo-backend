@@ -5,9 +5,12 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const mongoose = require("mongoose");
 require("dotenv").config();
+
 import { Application, Request, Response, NextFunction } from "express";
 import HttpException from "./exceptions/HttpException";
 import FormModel from "./models/formModel";
+import NumberQuestion from "./models/numberQuestionModel";
+import TextQuestion from "./models/textQuestionModel";
 
 const indexRouter = require("./routes/indexRoute");
 
@@ -49,12 +52,39 @@ app.listen(8000, async () => {
     console.log("Connected to database");
 
     // For testing purpose
+    // Subdocuments
+    const numQues = new NumberQuestion({
+      min: 10,
+    });
+    await numQues.save();
+
+    const textQues = new TextQuestion({
+      label: "abcd",
+    });
+    await textQues.save();
+
+    // Form
     const doc = new FormModel({
-      disableEditResponses: true,
       name: "My form",
       chatTheme: "BLUE",
+      questions: [
+        { questionType: "TextQuestion", questionId: textQues.id },
+        { questionType: "NumberQuestion", questionId: numQues.id },
+      ],
     });
     await doc.save();
+
+    // Populate
+    let result = await FormModel.findOne({ id: doc.id }).populate(
+      "questions.questionId"
+    );
+    const util = require("util");
+    console.log(util.inspect(result, false, null, true));
+
+    // Clean up db
+    await FormModel.findOneAndDelete({ id: doc.id });
+    await TextQuestion.findOneAndDelete({ id: textQues.id });
+    await NumberQuestion.findOneAndDelete({ id: numQues.id });
   } else {
     console.error("Did not find DB and/or DB_PASSWORD");
   }

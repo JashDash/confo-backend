@@ -22,6 +22,20 @@ const formsSchema = new Schema({
   description: {
     type: String,
   },
+  questions: [
+    {
+      questionType: {
+        type: String,
+        required: true,
+        enum: ["TextQuestion", "NumberQuestion"],
+      },
+      questionId: {
+        type: mongoose.Types.ObjectId,
+        required: true,
+        refPath: "questions.questionType",
+      },
+    },
+  ],
 });
 
 const Form = mongoose.model("Form", formsSchema);
