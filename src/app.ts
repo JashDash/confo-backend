@@ -54,12 +54,18 @@ app.listen(8000, async () => {
     // For testing purpose
     // Subdocuments
     const numQues = new NumberQuestion({
+      label: "Please enter your age",
+      name: "age",
+      exampleInput: "18, 21",
       min: 10,
+      max: 12,
     });
     await numQues.save();
 
     const textQues = new TextQuestion({
-      label: "abcd",
+      label: "Please enter your name",
+      name: "fullname",
+      exampleInput: "John, Mark",
     });
     await textQues.save();
 
