@@ -7,10 +7,10 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 
 import { Application, Request, Response, NextFunction } from "express";
-import test from "./controllers/testController";
+// import test from "./controllers/testController";
 import HttpException from "./exceptions/HttpException";
 
-const indexRouter = require("./routes/indexRoute");
+const formRouter = require("./routes/formRoute");
 
 const app: Application = express();
 
@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", indexRouter);
+app.use("/api/form", formRouter);
 
 // catch 404 and forward to error handler
 app.use((next: NextFunction) => {
@@ -48,7 +48,7 @@ app.listen(8000, async () => {
       useNewUrlParser: true,
     });
     console.log("Connected to database");
-    test();
+    // test();
   } else {
     console.error("Did not find DB and/or DB_PASSWORD");
   }
