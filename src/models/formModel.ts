@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import questionSchema from "./questionSchema";
 const { Schema } = mongoose;
 
 enum ThemeChoices {
@@ -6,24 +7,6 @@ enum ThemeChoices {
   "GREEN",
   "DARK",
 }
-
-const questionSchema = new Schema(
-  {
-    questionType: {
-      type: String,
-      required: true,
-      enum: ["TextQuestion", "NumberQuestion", "PhoneNumberQuestion"],
-    },
-    questionId: {
-      type: mongoose.Types.ObjectId,
-      required: true,
-      refPath: "questions.questionType",
-    },
-  },
-  {
-    _id: false,
-  }
-);
 
 const formsSchema = new Schema({
   disableEditResponses: {
