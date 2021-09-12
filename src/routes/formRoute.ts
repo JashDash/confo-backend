@@ -1,10 +1,7 @@
-import { Request, Response } from "express";
+import controllers from "../controllers/formControllers";
 const express = require("express");
 const router = express.Router();
 
-router.get("/", function (req: Request, res: Response) {
-  console.log(req);
-  res.send("Hello world!");
-});
+router.post("/metadata", controllers.postMetadata);
 
 module.exports = router;
