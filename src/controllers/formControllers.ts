@@ -47,8 +47,7 @@ const handleQuestion = async (question: any): Promise<IQuestionArray> => {
 const makeQuestions = async (questions: any): Promise<IQuestionArray[]> => {
   const questionsArray: IQuestionArray[] = [];
   for (const question of questions) {
-    const temp = await handleQuestion(question);
-    questionsArray.push(temp);
+    questionsArray.push(await handleQuestion(question));
   }
   return questionsArray;
 };
