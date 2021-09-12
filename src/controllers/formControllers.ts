@@ -9,20 +9,13 @@ interface IQuestionArray {
   questionId: mongoose.Types.ObjectId | null;
 }
 
-const handleTextQuestion = async (
-  question: any
+const populateAndSaveQuestion = async (
+  questionData: any,
+  QuestionModel: any
 ): Promise<mongoose.Types.ObjectId> => {
-  const textQuestion = new TextQuestion({ ...question });
-  await textQuestion.save();
-  return textQuestion.id;
-};
-
-const handleNumberQuestion = async (
-  question: any
-): Promise<mongoose.Types.ObjectId> => {
-  const numQuestion = new NumberQuestion({ ...question });
-  await numQuestion.save();
-  return numQuestion.id;
+  const question = new QuestionModel({ ...questionData });
+  await question.save();
+  return question.id;
 };
 
 const handleQuestion = async (question: any): Promise<IQuestionArray> => {
@@ -32,12 +25,12 @@ const handleQuestion = async (question: any): Promise<IQuestionArray> => {
     case "text":
       return {
         questionType: "TextQuestion",
-        questionId: await handleTextQuestion(question),
+        questionId: await populateAndSaveQuestion(question, TextQuestion),
       };
     case "number":
       return {
         questionType: "NumberQuestion",
-        questionId: await handleNumberQuestion(question),
+        questionId: await populateAndSaveQuestion(question, NumberQuestion),
       };
     default:
       return { questionType: "NOT DEFINED", questionId: null };
