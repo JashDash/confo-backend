@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import TextQuestion from "../models/textQuestionModel";
 import Form from "../models/formModel";
 import NumberQuestion from "../models/numberQuestionModel";
+import PhoneNumberQuestion from "../models/phoneNumberQuestionModel";
 
 interface IQuestionArray {
   questionType: string;
@@ -19,9 +20,9 @@ const populateAndSaveQuestion = async (
 };
 
 const handleQuestion = async (question: any): Promise<IQuestionArray> => {
-  const inputType = question.inputType;
-  delete question.inputType;
-  switch (inputType) {
+  const answerFormat = question.answerFormat;
+  delete question.answerFormat;
+  switch (answerFormat) {
     case "text":
       return {
         questionType: "TextQuestion",
@@ -31,6 +32,14 @@ const handleQuestion = async (question: any): Promise<IQuestionArray> => {
       return {
         questionType: "NumberQuestion",
         questionId: await populateAndSaveQuestion(question, NumberQuestion),
+      };
+    case "tel":
+      return {
+        questionType: "PhoneNumberQuestion",
+        questionId: await populateAndSaveQuestion(
+          question,
+          PhoneNumberQuestion
+        ),
       };
     default:
       return { questionType: "NOT DEFINED", questionId: null };
