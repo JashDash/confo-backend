@@ -8,6 +8,10 @@ enum ThemeChoices {
   "DARK",
 }
 
+const arrayLimit = (arr: [typeof questionSchema]) => {
+  return arr.length > 0;
+};
+
 const formsSchema = new Schema({
   disableEditResponses: {
     type: Boolean,
@@ -23,7 +27,10 @@ const formsSchema = new Schema({
   description: {
     type: String,
   },
-  questions: [questionSchema],
+  questions: {
+    type: [questionSchema],
+    validate: arrayLimit,
+  },
 });
 
 const Form = mongoose.model("Form", formsSchema);
