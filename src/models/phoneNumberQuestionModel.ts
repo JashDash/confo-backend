@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const phoneNumberQuestionSchema = new Schema({
-  label: {
+  "cf-questions": {
     type: String,
     required: true,
   },

@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 interface INumberQuestionSchema {
-  label: string;
+  "cf-questions": string;
   optional: boolean;
   name: string;
   exampleInput: string;
@@ -11,7 +11,7 @@ interface INumberQuestionSchema {
 }
 
 const numberQuestionSchema = new Schema<INumberQuestionSchema>({
-  label: {
+  "cf-questions": {
     type: String,
     required: true,
   },
