@@ -35,9 +35,9 @@ const test = async () => {
     name: "My form",
     chatTheme: "BLUE",
     questions: [
-      { questionType: "TextQuestion", questionId: textQues.id },
-      { questionType: "NumberQuestion", questionId: numQues.id },
-      { questionType: "PhoneNumberQuestion", questionId: phNoQues.id },
+      { questionType: "text", questionId: textQues.id },
+      { questionType: "number", questionId: numQues.id },
+      { questionType: "tel", questionId: phNoQues.id },
     ],
   });
   await form.save();
