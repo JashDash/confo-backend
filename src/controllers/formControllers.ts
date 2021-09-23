@@ -23,17 +23,17 @@ const handleQuestion = async (question: any): Promise<IQuestionArray> => {
   const answerFormat = question.answerFormat;
   delete question.answerFormat;
   switch (answerFormat) {
-    case "text":
+    case "Text Input":
       return {
         questionType: "TextQuestion",
         questionId: await populateAndSaveQuestion(question, TextQuestion),
       };
-    case "number":
+    case "Number":
       return {
         questionType: "NumberQuestion",
         questionId: await populateAndSaveQuestion(question, NumberQuestion),
       };
-    case "tel":
+    case "Phone Number":
       return {
         questionType: "PhoneNumberQuestion",
         questionId: await populateAndSaveQuestion(
