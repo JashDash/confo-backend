@@ -38,7 +38,7 @@ app.use((err: HttpException, req: Request, res: Response) => {
   res.json(res);
 });
 
-app.listen(8000, async () => {
+app.listen(5000, async () => {
   if (process.env.DB && process.env.DB_PASSWORD) {
     const database = process.env.DB.replace(
       "<password>",
