@@ -20,7 +20,7 @@ const formsSchema = new Schema({
     type: String,
     enum: ThemeChoices,
   },
-  name: {
+  formName: {
     type: String,
     required: true,
   },
