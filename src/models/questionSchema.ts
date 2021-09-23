@@ -6,7 +6,7 @@ const questionSchema = new Schema(
     questionType: {
       type: String,
       required: true,
-      enum: ["TextQuestion", "NumberQuestion", "PhoneNumberQuestion"],
+      enum: ["text", "number", "tel"],
     },
     questionId: {
       type: mongoose.Types.ObjectId,
