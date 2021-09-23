@@ -74,4 +74,13 @@ const postMetadata = async (req: Request, res: Response) => {
   res.send("ok");
 };
 
-export default { postMetadata };
+const getMetadata = async (req: Request, res: Response) => {
+  const metadata = await Form.findOne({ id: req.params.id }).populate(
+    "questions.questionId"
+  );
+  const util = require("util");
+  console.log(util.inspect(metadata, false, null, true));
+  res.json(metadata);
+};
+
+export default { postMetadata, getMetadata };
