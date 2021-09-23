@@ -3,9 +3,9 @@ import questionSchema from "./questionSchema";
 const { Schema } = mongoose;
 
 enum ThemeChoices {
-  "BLUE",
-  "GREEN",
-  "DARK",
+  "Blue",
+  "Green",
+  "Dark",
 }
 
 const arrayLimit = (arr: [typeof questionSchema]) => {
