@@ -36,7 +36,7 @@ const numberQuestionSchema = new Schema<INumberQuestionSchema>({
 });
 
 const NumberQuestion = mongoose.model<INumberQuestionSchema>(
-  "NumberQuestion",
+  "number",
   numberQuestionSchema
 );
 

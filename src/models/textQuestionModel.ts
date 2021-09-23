@@ -20,6 +20,6 @@ const textQuestionSchema = new Schema({
   },
 });
 
-const TextQuestion = mongoose.model("TextQuestion", textQuestionSchema);
+const TextQuestion = mongoose.model("text", textQuestionSchema);
 
 export default TextQuestion;

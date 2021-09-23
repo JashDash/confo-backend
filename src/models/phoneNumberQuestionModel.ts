@@ -24,9 +24,6 @@ const phoneNumberQuestionSchema = new Schema({
   },
 });
 
-const PhoneNumberQuestion = mongoose.model(
-  "PhoneNumberQuestion",
-  phoneNumberQuestionSchema
-);
+const PhoneNumberQuestion = mongoose.model("tel", phoneNumberQuestionSchema);
 
 export default PhoneNumberQuestion;
