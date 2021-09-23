@@ -23,19 +23,19 @@ const handleQuestion = async (question: any): Promise<IQuestionArray> => {
   const answerFormat = question.answerFormat;
   delete question.answerFormat;
   switch (answerFormat) {
-    case "Text Input":
+    case "text":
       return {
-        questionType: "TextQuestion",
+        questionType: answerFormat,
         questionId: await populateAndSaveQuestion(question, TextQuestion),
       };
-    case "Number":
+    case "number":
       return {
-        questionType: "NumberQuestion",
+        questionType: answerFormat,
         questionId: await populateAndSaveQuestion(question, NumberQuestion),
       };
-    case "Phone Number":
+    case "tel":
       return {
-        questionType: "PhoneNumberQuestion",
+        questionType: answerFormat,
         questionId: await populateAndSaveQuestion(
           question,
           PhoneNumberQuestion
@@ -78,8 +78,6 @@ const getMetadata = async (req: Request, res: Response) => {
   const metadata = await Form.findOne({ id: req.params.id }).populate(
     "questions.questionId"
   );
-  const util = require("util");
-  console.log(util.inspect(metadata, false, null, true));
   res.json(metadata);
 };
 
