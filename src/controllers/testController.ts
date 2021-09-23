@@ -50,10 +50,10 @@ const test = async () => {
   console.log(util.inspect(result, false, null, true));
 
   // Clean up db
-  await Form.findOneAndDelete({ id: form.id });
-  await TextQuestion.findOneAndDelete({ id: textQues.id });
-  await NumberQuestion.findOneAndDelete({ id: numQues.id });
-  await PhoneNumberQuestion.findOneAndDelete({ id: phNoQues.id });
+  // await Form.findOneAndDelete({ id: form.id });
+  // await TextQuestion.findOneAndDelete({ id: textQues.id });
+  // await NumberQuestion.findOneAndDelete({ id: numQues.id });
+  // await PhoneNumberQuestion.findOneAndDelete({ id: phNoQues.id });
 };
 
 export default test;
