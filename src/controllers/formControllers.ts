@@ -42,7 +42,7 @@ const handleQuestion = async (question: any): Promise<IQuestionArray> => {
         ),
       };
     default:
-      return { questionType: "NOT DEFINED", questionId: null };
+      return { questionType: "DEFAULT CASE", questionId: null };
   }
 };
 
@@ -74,10 +74,29 @@ const postMetadata = async (req: Request, res: Response) => {
   res.send("ok");
 };
 
+const parseData = (metadata: any) => {
+  let newQuestions: any = [];
+  metadata.questions.forEach((question: any) => {
+    const newQuestion = {
+      type: question.questionType,
+      tag: "input",
+      name: question.questionId.name,
+      "cf-questions": question.questionId.label,
+      "cf-input-placeholder": question.questionId.exampleInput,
+      required: !question.questionId.optional,
+    };
+    newQuestions.push(newQuestion);
+  });
+  return newQuestions;
+};
+
 const getMetadata = async (req: Request, res: Response) => {
-  const metadata = await Form.findOne({ id: req.params.id }).populate(
-    "questions.questionId"
-  );
+  let metadata: any = await Form.findOne({ id: req.params.id });
+  metadata = await metadata.populate("questions.questionId");
+  const newQuestions = parseData(metadata);
+  console.log(newQuestions);
+  metadata.questions = Array.from(newQuestions);
+  console.log(metadata.questions); // empty objects inside array
   res.json(metadata);
 };
 
