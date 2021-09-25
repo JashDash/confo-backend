@@ -91,7 +91,7 @@ const parseData = (metadata: any) => {
 };
 
 const getMetadata = async (req: Request, res: Response) => {
-  let metadata: any = await Form.findOne({ id: req.params.id });
+  let metadata: any = await Form.findOne({ _id: req.params.id });
   metadata = await metadata.populate("questions.questionId");
   const newQuestions = parseData(metadata);
   const obj = { ...metadata._doc };
