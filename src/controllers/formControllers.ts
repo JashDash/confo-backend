@@ -71,7 +71,7 @@ const postMetadata = async (req: Request, res: Response) => {
   );
   const form = await makeFormFromQuestions(req.body, questionsArray);
   await form.save((err) => console.error(err));
-  res.send("ok");
+  res.json({ formUrl: `http://localhost:3000/FormPage/${form.id}` });
 };
 
 const parseData = (metadata: any) => {
