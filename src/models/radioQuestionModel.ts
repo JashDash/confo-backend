@@ -6,7 +6,7 @@ interface IRadioQuestionSchema {
   optional: boolean;
   name: string;
   exampleInput: string;
-  valueOptions: [string];
+  children: [typeof Object];
 }
 
 const radioQuestionSchema = new Schema<IRadioQuestionSchema>({
@@ -26,8 +26,8 @@ const radioQuestionSchema = new Schema<IRadioQuestionSchema>({
     type: String,
     default: "",
   },
-  valueOptions: {
-    type: [String],
+  children: {
+    type: [Object],
   },
 });
 
