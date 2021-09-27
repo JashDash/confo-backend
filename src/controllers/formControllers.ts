@@ -4,6 +4,7 @@ import TextQuestion from "../models/textQuestionModel";
 import Form from "../models/formModel";
 import NumberQuestion from "../models/numberQuestionModel";
 import PhoneNumberQuestion from "../models/phoneNumberQuestionModel";
+import ResponseModel from "../models/responseModel";
 
 interface IQuestionArray {
   questionType: string;
@@ -100,7 +101,17 @@ const getMetadata = async (req: Request, res: Response) => {
 };
 
 const submitResponse = async (req: Request, res: Response) => {
-  console.log(req.body);
+  let response = req.body;
+  const formId: mongoose.Types.ObjectId = response.formId;
+  delete response.submit;
+  delete response.formId;
+  const obj = {
+    formId: formId,
+    fields: response,
+  };
+  const mResponse = new ResponseModel({ ...obj });
+  await mResponse.save();
+  console.log(mResponse);
 };
 
 export default { postMetadata, getMetadata, submitResponse };
