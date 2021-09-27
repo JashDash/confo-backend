@@ -6,6 +6,7 @@ import NumberQuestion from "../models/numberQuestionModel";
 import PhoneNumberQuestion from "../models/phoneNumberQuestionModel";
 import ResponseModel from "../models/responseModel";
 import EmailQuestion from "../models/emailQuestionModel";
+import RadioQuestion from "../models/radioQuestionModel";
 
 interface IQuestionArray {
   questionType: string;
@@ -47,6 +48,11 @@ const handleQuestion = async (question: any): Promise<IQuestionArray> => {
       return {
         questionType: answerFormat,
         questionId: await populateAndSaveQuestion(question, EmailQuestion),
+      };
+    case "radio":
+      return {
+        questionType: answerFormat,
+        questionId: await populateAndSaveQuestion(question, RadioQuestion),
       };
     default:
       return { questionType: "DEFAULT CASE", questionId: null };
