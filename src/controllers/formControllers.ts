@@ -153,4 +153,14 @@ const submitResponse = async (req: Request) => {
   console.log(mResponse);
 };
 
-export default { postMetadata, getMetadata, submitResponse };
+const getAllForms = async (req: Request, res: Response) => {
+  const forms = await Form.find({});
+  res.json(forms);
+};
+
+const getResponses = async (req: Request, res: Response) => {
+  const responses = await ResponseModel.find({});
+  res.json(responses);
+};
+
+export default { postMetadata, getMetadata, submitResponse, getAllForms };
