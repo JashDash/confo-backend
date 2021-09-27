@@ -7,6 +7,7 @@ import PhoneNumberQuestion from "../models/phoneNumberQuestionModel";
 import ResponseModel from "../models/responseModel";
 import EmailQuestion from "../models/emailQuestionModel";
 import RadioQuestion from "../models/radioQuestionModel";
+import CheckboxQuestion from "../models/checkboxQuestionModel";
 
 interface IQuestionArray {
   questionType: string;
@@ -54,6 +55,11 @@ const handleQuestion = async (question: any): Promise<IQuestionArray> => {
         questionType: answerFormat,
         questionId: await populateAndSaveQuestion(question, RadioQuestion),
       };
+    case "checkbox":
+      return {
+        questionType: answerFormat,
+        questionId: await populateAndSaveQuestion(question, CheckboxQuestion),
+      };
     default:
       return { questionType: "DEFAULT CASE", questionId: null };
   }
@@ -92,7 +98,7 @@ const parseData = (metadata: any) => {
   metadata.questions.forEach((question: any) => {
     let newQuestion = {};
     const type = question.questionType;
-    if (type === "radio") {
+    if (type === "radio" || type === "checkbox") {
       const children = question.questionId.children.map((child: any) => ({
         tag: "input",
         type: type,
