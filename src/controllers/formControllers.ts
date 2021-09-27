@@ -159,7 +159,7 @@ const getAllForms = async (res: Response) => {
 };
 
 const getResponses = async (req: Request, res: Response) => {
-  const responses = await ResponseModel.find({});
+  const responses = await ResponseModel.find({ formId: req.params.id });
   res.json(responses);
 };
 

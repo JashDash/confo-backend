@@ -1,12 +1,7 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
 
-interface IResponse {
-  formId: typeof mongoose.Types.ObjectId;
-  fields: Object;
-}
-
-const responseSchema = new Schema<IResponse>({
+const responseSchema = new Schema({
   formId: {
     type: mongoose.Types.ObjectId,
     required: true,
@@ -16,6 +11,6 @@ const responseSchema = new Schema<IResponse>({
   },
 });
 
-const ResponseModel = mongoose.model<IResponse>("response", responseSchema);
+const ResponseModel = mongoose.model("response", responseSchema);
 
 export default ResponseModel;
