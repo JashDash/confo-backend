@@ -5,6 +5,7 @@ import Form from "../models/formModel";
 import NumberQuestion from "../models/numberQuestionModel";
 import PhoneNumberQuestion from "../models/phoneNumberQuestionModel";
 import ResponseModel from "../models/responseModel";
+import EmailQuestion from "../models/emailQuestionModel";
 
 interface IQuestionArray {
   questionType: string;
@@ -41,6 +42,11 @@ const handleQuestion = async (question: any): Promise<IQuestionArray> => {
           question,
           PhoneNumberQuestion
         ),
+      };
+    case "email":
+      return {
+        questionType: answerFormat,
+        questionId: await populateAndSaveQuestion(question, EmailQuestion),
       };
     default:
       return { questionType: "DEFAULT CASE", questionId: null };
@@ -100,7 +106,7 @@ const getMetadata = async (req: Request, res: Response) => {
   res.json(obj);
 };
 
-const submitResponse = async (req: Request, res: Response) => {
+const submitResponse = async (req: Request) => {
   let response = req.body;
   const formId: mongoose.Types.ObjectId = response.formId;
   delete response.submit;
