@@ -153,7 +153,7 @@ const submitResponse = async (req: Request) => {
   console.log(mResponse);
 };
 
-const getAllForms = async (req: Request, res: Response) => {
+const getAllForms = async (res: Response) => {
   const forms = await Form.find({});
   res.json(forms);
 };
