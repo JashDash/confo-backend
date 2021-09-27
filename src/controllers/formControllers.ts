@@ -90,14 +90,35 @@ const postMetadata = async (req: Request, res: Response) => {
 const parseData = (metadata: any) => {
   let newQuestions: any = [];
   metadata.questions.forEach((question: any) => {
-    const newQuestion = {
-      type: question.questionType,
-      tag: "input",
-      name: question.questionId.name,
-      "cf-questions": question.questionId.label,
-      "cf-input-placeholder": question.questionId.exampleInput,
-      required: !question.questionId.optional,
-    };
+    let newQuestion = {};
+    const type = question.questionType;
+    if (type === "radio") {
+      const children = question.questionId.children.map((child: any) => ({
+        tag: "input",
+        type: type,
+        name: question.questionId.name,
+        "cf-label": child,
+      }));
+      newQuestion = {
+        type: question.questionType,
+        tag: "fieldset",
+        name: question.questionId.name,
+        "cf-questions": question.questionId.label,
+        "cf-input-placeholder": question.questionId.exampleInput,
+        required: !question.questionId.optional,
+        children: children,
+      };
+    } else {
+      newQuestion = {
+        type: question.questionType,
+        tag: "input",
+        name: question.questionId.name,
+        "cf-questions": question.questionId.label,
+        "cf-input-placeholder": question.questionId.exampleInput,
+        required: !question.questionId.optional,
+      };
+    }
+    console.log(newQuestion);
     newQuestions.push(newQuestion);
   });
   return newQuestions;
