@@ -124,7 +124,6 @@ const parseData = (metadata: any) => {
         required: !question.questionId.optional,
       };
     }
-    console.log(newQuestion);
     newQuestions.push(newQuestion);
   });
   return newQuestions;
@@ -150,7 +149,6 @@ const submitResponse = async (req: Request) => {
   };
   const mResponse = new ResponseModel({ ...obj });
   await mResponse.save();
-  console.log(mResponse);
 };
 
 const getAllForms = async (res: Response) => {
