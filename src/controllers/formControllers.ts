@@ -99,4 +99,8 @@ const getMetadata = async (req: Request, res: Response) => {
   res.json(obj);
 };
 
-export default { postMetadata, getMetadata };
+const submitResponse = async (req: Request, res: Response) => {
+  console.log(req.body);
+};
+
+export default { postMetadata, getMetadata, submitResponse };
