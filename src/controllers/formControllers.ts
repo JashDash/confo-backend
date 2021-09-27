@@ -163,4 +163,10 @@ const getResponses = async (req: Request, res: Response) => {
   res.json(responses);
 };
 
-export default { postMetadata, getMetadata, submitResponse, getAllForms };
+export default {
+  postMetadata,
+  getMetadata,
+  submitResponse,
+  getAllForms,
+  getResponses,
+};
