@@ -151,7 +151,7 @@ const submitResponse = async (req: Request) => {
   await mResponse.save();
 };
 
-const getAllForms = async (res: Response) => {
+const getAllForms = async (req:Request, res: Response) => {
   const forms = await Form.find({});
   res.json(forms);
 };
